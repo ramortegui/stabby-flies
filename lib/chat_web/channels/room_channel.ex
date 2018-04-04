@@ -22,6 +22,12 @@ defmodule ChatWeb.RoomChannel do
     {:noreply, socket}
   end
 
+  def handle_in("connect", payload, socket) do
+    broadcast socket, "connect", %{"one" => :two, 3 => "four"}
+    {:noreply, socket}
+  end
+
+
   # Add authorization logic here as required.
   defp authorized?(_payload) do
     true

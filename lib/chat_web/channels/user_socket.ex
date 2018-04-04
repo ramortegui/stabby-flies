@@ -3,6 +3,7 @@ defmodule ChatWeb.UserSocket do
 
   ## Channels
   # channel "room:*", ChatWeb.RoomChannel
+  channel "room:lobby", ChatWeb.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
@@ -22,6 +23,8 @@ defmodule ChatWeb.UserSocket do
   def connect(_params, socket) do
     {:ok, socket}
   end
+
+  
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
   #
