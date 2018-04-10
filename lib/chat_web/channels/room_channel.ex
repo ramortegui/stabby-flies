@@ -36,6 +36,9 @@ end
         name: msg.name,
         message: msg.message,
       }) end)
+      push(socket, "initialize", %{
+        map: [['x', 'x'], ['x', 'y']],
+      })
     {:noreply, socket} # :noreply
   end
 

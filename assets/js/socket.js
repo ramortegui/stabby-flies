@@ -50,6 +50,14 @@ channel.push('connect', { // send the message to the server on "shout" channel
 });
 
 
+channel.on('initialize', function (payload) { // listen to the 'shout' event
+  var canvas = document.createElement("canvas"); // creaet new list item DOM element
+  console.log(payload)
+
+  ul.appendChild(li);                    // append to list
+});
+
+
 
 /* End Add */
 
