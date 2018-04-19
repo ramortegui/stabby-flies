@@ -1,5 +1,6 @@
 defmodule ChatWeb.RoomChannel do
   use ChatWeb, :channel
+  require Logger
 
 def join("room:lobby", payload, socket) do
   if authorized?(payload) do
@@ -31,13 +32,14 @@ end
   end
 
   def handle_info(:after_join, socket) do
+    # Logger.debug Game.background
     Chat.Message.get_messages()
     |> Enum.each(fn msg -> push(socket, "shout", %{
         name: msg.name,
         message: msg.message,
       }) end)
       push(socket, "initialize", %{
-        map: [['x', 'x'], ['x', 'y']],
+        map: Game.background(),
       })
     {:noreply, socket} # :noreply
   end

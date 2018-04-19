@@ -2,5 +2,22 @@
 
 #chat {
   width: 250px;
-  position: absolute;
+  margin-left: 10px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 80% auto;
+}
+
+#game-container {
+  background-color: #ddd;
+  font-size: 50px;
+  font-family: monospace;
+}
+
+#game-container-grid {
+  grid-template-rows: repeat(auto, 5) ;
+  grid-template-columns: repeat(auto, 5);
+
 }

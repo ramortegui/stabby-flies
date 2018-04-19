@@ -4,6 +4,9 @@
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/web/endpoint.ex":
 import {Socket} from "phoenix"
+import {Game} from "./game"
+
+let game = new Game()
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
@@ -51,10 +54,9 @@ channel.push('connect', { // send the message to the server on "shout" channel
 
 
 channel.on('initialize', function (payload) { // listen to the 'shout' event
-  var canvas = document.createElement("canvas"); // creaet new list item DOM element
   console.log(payload)
-
-  ul.appendChild(li);                    // append to list
+  game.setup({map: payload.map})
+ 
 });
 
 

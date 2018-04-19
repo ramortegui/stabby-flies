@@ -1,4 +1,4 @@
-# Chat
+# ASCII Quest
 
 To start your Phoenix server:
 
