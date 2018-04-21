@@ -2,6 +2,7 @@ import Player from './player'
 export class Game {
   constructor() {
     this.display = undefined
+    this.engine = undefined
 
     this.state = {
       camera: {
@@ -20,6 +21,12 @@ export class Game {
     this.state.map = map
 
     this.display = new ROT.Display();
+    
+    const scheduler = new ROT.Scheduler.Simple();
+
+    this.engine = new ROT.Engine(scheduler);
+    this.engine.start();
+
     const k = document.getElementById('game-container-grid')
     if (k.children.length === 0) {
       k.appendChild(this.display.getContainer());
