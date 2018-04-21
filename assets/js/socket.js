@@ -5,6 +5,7 @@
 // and connect at the socket path in "lib/web/endpoint.ex":
 import {Socket} from "phoenix"
 import {Game} from "./game"
+import Player from "./player";
 
 let game = new Game()
 
@@ -27,6 +28,9 @@ channel.on('connect', function (payload) { // listen to the 'shout' event
   console.log(payload)
   li.innerHTML = '<b> SOMEONE CONNECTED</b>'; // set li contents
   ul.appendChild(li);                    // append to list
+
+  const player = new Player({ x: 0, y: 0})
+  game.addPlayer(player)
 });
 
 channel.join(); // join the channel.

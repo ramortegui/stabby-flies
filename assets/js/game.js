@@ -1,3 +1,4 @@
+import Player from './player'
 export class Game {
   constructor() {
     this.display = undefined
@@ -9,6 +10,8 @@ export class Game {
       },
       map: {}
     }
+
+    this.players = []
   }
 
   setup(obj) {
@@ -18,10 +21,21 @@ export class Game {
 
     this.display = new ROT.Display();
     const k = document.getElementById('game-container-grid')
-    k.appendChild(this.display.getContainer());
+    if (k.children.length === 0) {
+      k.appendChild(this.display.getContainer());
+    }
 
     this.drawWholeMap()
 
+  }
+
+  addPlayer(player) {
+    this.players.push(player)
+    this.drawPlayer(player)
+  }
+
+  drawPlayer (player) {
+    this.display.draw(player.x, player.y, "@", "#ff0");
   }
 
 
@@ -52,4 +66,6 @@ export class Game {
     document.getElementById('game-container-grid').appendChild(div)
 
   }
+
+  
 }
