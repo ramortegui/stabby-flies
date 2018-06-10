@@ -3,66 +3,67 @@
 
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/web/endpoint.ex":
-import {Socket} from "phoenix"
-import {Game} from "./game"
+import { Socket } from "phoenix";
+import { Game } from "./game";
 import Player from "./player";
 
-let game = new Game()
+let game = new Game();
 
-let socket = new Socket("/socket", {params: {token: window.userToken}})
+let socket = new Socket("/socket", { params: { token: window.userToken } });
 
 /* Begin Add */
 
-var channel = socket.channel('room:lobby', {}); // connect to chat "room"
+var channel = socket.channel("room:lobby", {}); // connect to chat "room"
 
-channel.on('shout', function (payload) { // listen to the 'shout' event
+channel.on("shout", function(payload) {
+  // listen to the 'shout' event
   var li = document.createElement("li"); // creaet new list item DOM element
-  var {name, message} = payload;    // get name from payload or set default
-  li.innerHTML = '<b>' + name + '</b>: ' + message; // set li contents
-  ul.appendChild(li);                    // append to list
+  var { name, message } = payload; // get name from payload or set default
+  li.innerHTML = "<b>" + name + "</b>: " + message; // set li contents
+  ul.appendChild(li); // append to list
 });
 
-channel.on('connect', function (payload) { // listen to the 'shout' event
+channel.on("connect", function(payload) {
+  // listen to the 'shout' event
   var li = document.createElement("li"); // creaet new list item DOM element
-  var name = payload.name || 'guest';    // get name from payload or set default
-  console.log(payload)
-  li.innerHTML = '<b> SOMEONE CONNECTED</b>'; // set li contents
-  ul.appendChild(li);                    // append to list
+  var name = payload.name || "guest"; // get name from payload or set default
+  console.log(payload);
+  li.innerHTML = "<b> SOMEONE CONNECTED</b>"; // set li contents
+  ul.appendChild(li); // append to list
 
-  const player = new Player({ x: 0, y: 0})
-  game.addPlayer(player)
+  const player = new Player({ x: 0, y: 0 });
+  game.addPlayer(player);
 });
 
 channel.join(); // join the channel.
 
-
-var ul = document.getElementById('msg-list');        // list of messages.
-var msg = document.getElementById('msg');            // message input field
+var ul = document.getElementById("msg-list"); // list of messages.
+var msg = document.getElementById("msg"); // message input field
 
 // "listen" for the [Enter] keypress event to send a message:
-msg.addEventListener('keypress', function (event) {
-  if (event.keyCode == 13 && msg.value.length > 0) { // don't sent empty msg.
-    channel.push('shout', { // send the message to the server on "shout" channel
-      name: 'Guest',     // get value of "name" of person sending the message
-      message: msg.value    // get message text (value) from msg input field.
+msg.addEventListener("keypress", function(event) {
+  if (event.keyCode == 13 && msg.value.length > 0) {
+    // don't sent empty msg.
+    channel.push("shout", {
+      // send the message to the server on "shout" channel
+      name: "Guest", // get value of "name" of person sending the message
+      message: msg.value // get message text (value) from msg input field.
     });
-    msg.value = '';         // reset the message input field for next message.
+    msg.value = ""; // reset the message input field for next message.
   }
 });
 
-channel.push('connect', { // send the message to the server on "shout" channel
+channel.push("connect", {
+  // send the message to the server on "shout" channel
   // name: 'Admin',     // get value of "name" of person sending the message
   // message: 'Someone joined the server'    // get message text (value) from msg input field.
 });
 
-
-channel.on('initialize', function (payload) { // listen to the 'shout' event
-  console.log(payload)
-  game.setup({map: payload.map})
- 
+channel.on("initialize", function(payload) {
+  // listen to the 'shout' event
+  console.log(payload);
+  game.setup({ map: payload.map });
 });
-
-
 
 /* End Add */
 
@@ -110,7 +111,7 @@ channel.on('initialize', function (payload) { // listen to the 'shout' event
 // Finally, pass the token on connect as below. Or remove it
 // from connect if you don't care about authentication.
 
-socket.connect()
+socket.connect();
 
 // Now that you are connected, you can join channels with a topic:
 // let channel = socket.channel("topic:subtopic", {})
@@ -118,4 +119,4 @@ socket.connect()
 //   .receive("ok", resp => { console.log("Joined successfully", resp) })
 //   .receive("error", resp => { console.log("Unable to join", resp) })
 
-export default socket
+export default socket;

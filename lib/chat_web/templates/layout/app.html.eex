@@ -20,16 +20,12 @@
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <div class="grid-container">
-        <div id="game-container-grid">
 
-        </div>
         <div id="chat">
           <%= render @view_module, @view_template, assigns %>
         </div>
-      </div>
 
-    </div> <!-- /container -->
+    </div>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
