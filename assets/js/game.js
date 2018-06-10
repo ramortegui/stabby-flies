@@ -1,5 +1,6 @@
 import Player from "./player";
 import {setupCanvas} from './utils/'
+import Fly from './fly'
 
 export class Game {
   constructor() {
@@ -35,6 +36,8 @@ export class Game {
     floor.y = 200
     
     this.app.stage.addChild(floor);
+    this.app.stage.addChild(new Fly());
+
 
     requestAnimationFrame(this.animate.bind(this));
   }
