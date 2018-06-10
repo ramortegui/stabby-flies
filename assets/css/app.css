@@ -5,6 +5,10 @@
   margin-left: 10px;
 }
 
+.container {
+  display: none;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: 80% auto;

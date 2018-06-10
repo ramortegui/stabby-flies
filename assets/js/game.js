@@ -19,8 +19,16 @@ export class Game {
   setup(obj) {
     console.log("setup");
     const app = new PIXI.Application({width: 512, height: 256});
-    setupCanvas(app.view)
+    setupCanvas(app)
+    app.renderer.backgroundColor = 0x91bee2;
 
+    PIXI.loader
+    .add('/spritesheet.json')
+    .load(this.loaded);
+  }
+
+  loaded = () => {
+    console.log('LOADED :D ')
   }
 
   addPlayer(player) {
