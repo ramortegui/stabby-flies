@@ -18,17 +18,29 @@ export class Game {
 
   setup(obj) {
     console.log("setup");
-    const app = new PIXI.Application({width: 512, height: 256});
-    setupCanvas(app)
-    app.renderer.backgroundColor = 0x91bee2;
+    this.app = new PIXI.Application({width: 600, height: 300});
+    setupCanvas(this.app)
+    this.app.renderer.backgroundColor = 0x91bee2;
 
     PIXI.loader
     .add('/spritesheet.json')
-    .load(this.loaded);
+    .load(this.loaded.bind(this));
   }
 
-  loaded = () => {
-    console.log('LOADED :D ')
+  loaded () {
+    console.log('LOADED :Ds ')
+
+    const floor = new PIXI.extras
+    .TilingSprite(PIXI.Texture.fromImage('earthen_floor.png'), 5000, 100);
+    floor.y = 200
+    
+    this.app.stage.addChild(floor);
+
+    requestAnimationFrame(this.animate.bind(this));
+  }
+
+  animate() {
+    requestAnimationFrame(this.animate.bind(this));
   }
 
   addPlayer(player) {
