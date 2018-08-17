@@ -41,15 +41,28 @@ var ul = document.getElementById("msg-list"); // list of messages.
 var msg = document.getElementById("msg"); // message input field
 
 // "listen" for the [Enter] keypress event to send a message:
-msg.addEventListener("keypress", function(event) {
-  if (event.keyCode == 13 && msg.value.length > 0) {
-    // don't sent empty msg.
-    channel.push("shout", {
-      // send the message to the server on "shout" channel
-      name: "Guest", // get value of "name" of person sending the message
-      message: msg.value // get message text (value) from msg input field.
-    });
-    msg.value = ""; // reset the message input field for next message.
+document.addEventListener("keypress", function(event) {
+  console.log("Hit ", event.key)
+  switch (event.key) {
+    case "Enter":
+      if (msg.value.length > 0) {
+        // don't sent empty msg.
+        channel.push("shout", {
+          // send the message to the server on "shout" channel
+          name: "Guest", // get value of "name" of person sending the message
+          message: msg.value // get message text (value) from msg input field.
+        });
+        msg.value = ""; // reset the message input field for next message.
+      }
+
+      break;
+    case "d": 
+    case "a": 
+    channel.push("keydown", {
+        key: event.key
+      })
+      break;
+
   }
 });
 

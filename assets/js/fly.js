@@ -10,7 +10,6 @@ export default class Fly extends PIXI.Container {
     }
     let mc = new PIXI.extras.AnimatedSprite(textureArray);
     mc.play()
-    window.mc = mc
     mc.animationSpeed = .1
     this.addChild(mc)
   }
