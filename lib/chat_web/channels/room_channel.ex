@@ -5,9 +5,6 @@ defmodule ChatWeb.RoomChannel do
   def join("room:lobby", payload, socket) do
     if authorized?(payload) do
       send(self(), :after_join)
-      # Logger.debug socket
-      # IO.inspect socket
-
       {:ok, socket}
     else
       {:error, %{reason: "unauthorized"}}
@@ -34,8 +31,6 @@ defmodule ChatWeb.RoomChannel do
   end
 
   def handle_info(:after_join, socket) do
-
-
     name = ["Hassan", "George", "Jane"] |> Enum.shuffle |> hd
 
     new_player = %{
@@ -56,6 +51,7 @@ defmodule ChatWeb.RoomChannel do
       }) end)
       push(socket, "initialize", %{
         map: Chat.Game.background(),
+        new_player: new_player
       })
     {:noreply, socket} # :noreply
   end

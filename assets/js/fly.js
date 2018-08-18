@@ -1,6 +1,8 @@
-export default class Fly extends PIXI.Container {
-  constructor() {
-    super();
+import Player from "./player";
+
+export default class Fly extends Player {
+  constructor(props) {
+    super(props);
 
     // let alienImages = ["clg.png","image_sequence_02.png","image_sequence_03.png","image_sequence_04.png"];
     let textureArray = [];

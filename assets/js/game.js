@@ -25,10 +25,10 @@ export class Game {
 
     PIXI.loader
     .add('/spritesheet.json')
-    .load(this.loaded.bind(this));
+    .load(this.loaded.bind(this, obj));
   }
 
-  loaded () {
+  loaded(obj) {
     console.log('LOADED :Ds ')
 
     const floor = new PIXI.extras
@@ -36,7 +36,8 @@ export class Game {
     floor.y = 200
     
     this.app.stage.addChild(floor);
-    this.app.stage.addChild(new Fly());
+
+    this.addPlayer(obj.new_player)
 
 
     requestAnimationFrame(this.animate.bind(this));
@@ -46,10 +47,28 @@ export class Game {
     requestAnimationFrame(this.animate.bind(this));
   }
 
-  addPlayer(player) {
+  addPlayer (obj) {
+
+    console.log(obj)
+    const player = new Fly({ 
+      x: obj.x, 
+      y: obj.y,
+      name: obj.name
+    });
+
     this.players.push(player);
     this.drawPlayer(player);
   }
 
-  drawPlayer(player) {}
+  drawPlayer(player)  {
+    console.log("DRAW PLAYER FLY")
+    // const fly = new Fly();
+    // fly.x = player.x;
+    // fly.y = player.y;
+    // console.log(player.x, player.y)
+
+    this.app.stage.addChild(player);
+    
+
+  }
 }

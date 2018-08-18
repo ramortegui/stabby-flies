@@ -17,8 +17,10 @@ defmodule Chat.Game do
   end
 
   def add_player(name) do
+    x = Enum.random(0..200)
+    y = 0 # Enum.random(0..n)
     Agent.update(__MODULE__, fn(state) -> 
-      player = %{"name" => name, "x" => 0, "y" => 0}
+      player = %{"name" => name, "x" => x, "y" => y}
       # Map.put(state, :players, state.players ++ [player])
       Map.put(state, :players, [player | state.players] )
     end)
@@ -28,11 +30,14 @@ defmodule Chat.Game do
     Agent.update(__MODULE__, fn(_state) -> %{} end)
   end
 
-  # get number of watches a player has. Each hand can have several
   def get_players do
     Agent.get(__MODULE__, fn(state) ->
       state.players
     end)
+  end
+
+  def get_player(name) do
+    get_players |> Enum.find([], fn x -> x[name] == name end )
   end
 
   
