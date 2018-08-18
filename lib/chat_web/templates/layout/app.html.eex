@@ -12,6 +12,7 @@
   </head>
 
   <body>
+    <script>window.userToken = "<%= assigns[:user_token] %>";</script>
     <div class="container">
       <%# <header class="header">
         <span class="logo"></span>
