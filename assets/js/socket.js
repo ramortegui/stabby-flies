@@ -73,7 +73,7 @@ channel.push("connect", {
 
 channel.on("initialize", function(payload) {
   // listen to the 'shout' event
-  console.log(payload);
+  console.log('initialize:', payload);
   game.setup(payload);
 });
 

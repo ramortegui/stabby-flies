@@ -19,11 +19,12 @@ defmodule Chat.Game do
   def add_player(name) do
     x = Enum.random(0..200)
     y = 0 # Enum.random(0..n)
+    player = %{name: name, x: x, y: y}
+
     Agent.update(__MODULE__, fn(state) -> 
-      player = %{"name" => name, "x" => x, "y" => y}
-      # Map.put(state, :players, state.players ++ [player])
       Map.put(state, :players, [player | state.players] )
     end)
+    player
   end
 
   def reset() do
@@ -36,8 +37,8 @@ defmodule Chat.Game do
     end)
   end
 
-  def get_player(name) do
-    get_players |> Enum.find([], fn x -> x[name] == name end )
+  def get_player_by_name(name) do
+    get_players |> Enum.find([], fn x -> x[:name] == name end )
   end
 
   
@@ -53,16 +54,16 @@ defmodule Chat.Game do
     end)
   end
 
-  def start do
-    {:ok, pid} = Chat.Game.start_link
+  # def start do
+  #   {:ok, pid} = Chat.Game.start_link
     
-    Chat.Game.add_player("George")
-    Chat.Game.add_player("Lopez")
-    Chat.Game.add_player("Lee")
+  #   Chat.Game.add_player("George")
+  #   Chat.Game.add_player("Lopez")
+  #   Chat.Game.add_player("Lee")
 
 
-    Chat.Game.get_players()
+  #   Chat.Game.get_players()
 
-    # {:ok, pid} 
-  end
+  #   # {:ok, pid} 
+  # end
 end

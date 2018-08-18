@@ -4,7 +4,7 @@ export default class Player extends PIXI.Container {
     console.log(props.x)
     console.log(props.y)
 
-    // this.x = props.x;
-    // this.y = props.y;
+    this.x = props.x;
+    this.y = props.y;
   }
 }

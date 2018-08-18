@@ -2,6 +2,8 @@ defmodule ChatWeb.RoomChannel do
   use ChatWeb, :channel
   require Logger
 
+  alias Chat.Game
+
   def join("room:lobby", payload, socket) do
     if authorized?(payload) do
       send(self(), :after_join)
@@ -32,25 +34,16 @@ defmodule ChatWeb.RoomChannel do
 
   def handle_info(:after_join, socket) do
     name = ["Hassan", "George", "Jane"] |> Enum.shuffle |> hd
+    new_player = Game.add_player(name)
 
-    new_player = %{
-      :name => name, 
-      # :transport_pid => socket[:transport_pid], 
-      :x => 0, 
-      :y => 0
-    }
-
-    Logger.debug name
-    Chat.Game.add_player(name)
-
-    # Logger.debug Game.background
+    # Logger.debug new_player
     Chat.Message.get_messages()
     |> Enum.each(fn msg -> push(socket, "shout", %{
         name: msg.name,
         message: msg.message,
       }) end)
       push(socket, "initialize", %{
-        map: Chat.Game.background(),
+        map: Game.background(),
         new_player: new_player
       })
     {:noreply, socket} # :noreply
