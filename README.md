@@ -4,10 +4,16 @@ Multiplayer Browser Game in Elixir/Phoenix
 
 ![Screenshot](noob_quest_screenshot.png "Screenshot 1")
 
-
 ## Status
 
 Still really early, feel free to contribute in any capacity as I am ultimately doing this to learn.
+
+## Issues / To-Do
+
+- Currently a players name to uniquely identify them when it should be a socket id or something of the sort
+- Get tests for Game working properly
+- Maybe make a wrapper around player? Not sure if that is the Elixir way : )
+
 
 ## Installation
 
