@@ -37,9 +37,18 @@ defmodule Chat.Game do
     end)
   end
 
+  # TODO: Should probably be get_player and then just use the documentation thing to document it
   def get_player_by_name(name) do
     get_players |> Enum.find([], fn x -> x[:name] == name end )
   end
+
+  # def move_player(name, direction) do
+  #   Agent.update(__MODULE__, fn(state) -> 
+  #     player = get_player_by_name(name)
+
+  #     Map.replace(state, player, count + 1)
+  #   end)
+  # end
 
   
   # not properly implemented d : 

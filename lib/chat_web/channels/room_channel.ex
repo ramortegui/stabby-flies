@@ -32,11 +32,22 @@ defmodule ChatWeb.RoomChannel do
     {:noreply, socket}
   end
 
+  def handle_in("move", payload, socket) do
+    IO.inspect socket
+
+    # cond do 
+    #   payload["direction"] == "left" -> Game.move_player("name", "left")
+    #   payload["direction"] == "right" ->Game.move_player("name", "right")
+    # end
+
+    {:reply, {:ok, payload}, socket}
+  end
+
+
   def handle_info(:after_join, socket) do
     name = ["Hassan", "George", "Jane"] |> Enum.shuffle |> hd
     new_player = Game.add_player(name)
 
-    # Logger.debug new_player
     Chat.Message.get_messages()
     |> Enum.each(fn msg -> push(socket, "shout", %{
         name: msg.name,
@@ -53,10 +64,7 @@ defmodule ChatWeb.RoomChannel do
 
   def handle_in("keydown", payload, socket) do
     Logger.debug "keydown #{payload["key"]}" 
-    cond do 
-      payload["key"] == "d" -> Logger.debug "right"
-      payload["key"] == "a" -> Logger.debug "left"
-    end
+
     {:reply, {:ok, payload}, socket}
   end
 

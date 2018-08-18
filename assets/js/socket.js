@@ -56,9 +56,12 @@ document.addEventListener("keypress", function(event) {
 
       break;
     case "d": 
+      channel.push("move", {
+        direction: "left"
+      })
     case "a": 
-    channel.push("keydown", {
-        key: event.key
+    channel.push("move", {
+      direction: "right"
       })
       break;
 
