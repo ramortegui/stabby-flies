@@ -21,6 +21,7 @@ defmodule Chat.Application do
     opts = [strategy: :one_for_one, name: Chat.Supervisor]
     Supervisor.start_link(children, opts)
     Chat.Game.start_link
+    Chat.SocketIdGen.start_link
   end
 
   # Tell Phoenix to update the endpoint configuration
